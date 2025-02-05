@@ -1,0 +1,88 @@
+/* Container styling */
+.game-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Styling for the target color box */
+.color-box {
+  width: 150px;
+  height: 150px;
+  margin: 20px auto;
+  border: 2px solid #000;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Container for the color option buttons */
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Styling for each color option button */
+.color-button {
+  width: 80px;
+  height: 80px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.color-button:hover {
+  transform: scale(1.1);
+}
+
+/* Styling for the new game button */
+.new-game-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #555;
+  color: white;
+}
+
+/* Animation classes */
+.correct-animation {
+  animation: correctAnim 0.5s;
+}
+
+.wrong-animation {
+  animation: wrongAnim 0.5s;
+}
+
+/* Keyframes for correct answer celebration */
+@keyframes correctAnim {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Keyframes for wrong answer fade-out effect */
+@keyframes wrongAnim {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Responsive design adjustments */
+@media (max-width: 600px) {
+  .color-box {
+    width: 120px;
+    height: 120px;
+  }
+
+  .color-button {
+    width: 60px;
+    height: 60px;
+  }
+}
