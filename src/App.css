@@ -1,88 +1,258 @@
-/* Container styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .game-container {
+  background: rgba(255, 255, 255, 0.95);
+  max-width: 2000px;
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(10px);
+}
+
+h2 {
+  color: #1a1a1a;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
   text-align: center;
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
-/* Styling for the target color box */
 .color-box {
-  width: 150px;
-  height: 150px;
-  margin: 20px auto;
-  border: 2px solid #000;
-  transition: all 0.5s ease-in-out;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 3rem;
+  border-radius: 20px;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-/* Container for the color option buttons */
+.color-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  pointer-events: none;
+}
+
 .options-container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0 auto 2.5rem;
+  padding: 0.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
-/* Styling for each color option button */
 .color-button {
+  flex: 0 0 auto;
   width: 80px;
   height: 80px;
   border: none;
+  border-radius: 16px;
   cursor: pointer;
-  outline: none;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.color-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .color-button:hover {
-  transform: scale(1.1);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
 }
 
-/* Styling for the new game button */
+.color-button:hover::after {
+  opacity: 1;
+}
+
+.color-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.game-status {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  min-height: 2rem;
+  margin: 2rem 0;
+  color: #1a1a1a;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+.score {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 2rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
 .new-game-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  display: block;
+  margin: 2rem auto 0;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   cursor: pointer;
-  background-color: #555;
-  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 12px rgba(102, 126, 234, 0.3),
+    0 0 0 1px rgba(102, 126, 234, 0.1);
 }
 
-/* Animation classes */
+.new-game-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 16px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(102, 126, 234, 0.1);
+}
+
+.new-game-button:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes correct-shake {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wrong-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
 .correct-animation {
-  animation: correctAnim 0.5s;
+  animation: correct-shake 0.6s cubic-bezier(0.36, 0, 0.66, -0.56);
 }
 
 .wrong-animation {
-  animation: wrongAnim 0.5s;
+  animation: wrong-shake 0.5s cubic-bezier(0.36, 0, 0.66, -0.56);
 }
 
-/* Keyframes for correct answer celebration */
-@keyframes correctAnim {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-/* Keyframes for wrong answer fade-out effect */
-@keyframes wrongAnim {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-/* Responsive design adjustments */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .game-container {
+    padding: 1.5rem;
+    width: 95%;
+  }
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
   .color-box {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2rem;
   }
+  .options-container {
+    gap: 1rem;
+  }
+}
 
-  .color-button {
-    width: 60px;
-    height: 60px;
+@media (max-width: 480px) {
+  .color-box {
+    width: 150px;
+    height: 150px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.color-button:focus-visible,
+.new-game-button:focus-visible {
+  outline: 3px solid #667eea;
+  outline-offset: 2px;
 }
